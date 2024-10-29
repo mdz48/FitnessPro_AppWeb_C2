@@ -1,0 +1,20 @@
+<app-navbar [link]="links" [button]="button"/>
+<main class="flex justify-center items-center h-[80vh]">
+    <section class="flex w-[90%] justify-between">
+        <div class=" flex items-center flex-col justify-center w-[50%] gap-10">
+            <div id="title">
+                <h1 class="text-[120px] font-bold">FitnessPro</h1>
+            </div>
+            <div id="description">
+                <p class="text-[24px]">We help you select the best routine based on your preferences</p>
+            </div>
+                <button class="bg-orange-500 text-white py-2.5 px-10 rounded-lg text-lg font-montserrat" routerLink="login">
+                    Get Started
+                    <i class="pi pi-arrow-right"></i>
+                </button>
+        </div>
+        <div class="w-[50%] flex justify-center items-center">
+            <img src="assets/women_landing.png" alt="image" class="w-[100%]">
+        </div>
+    </section>
+</main>
