@@ -15,66 +15,97 @@ import { Router } from '@angular/router';
   styleUrl: './preferences.component.css'
 })
 export class PreferencesComponent {
-  constructor(private router: Router, private workoutsService: WorkoutsService) {}
+  preferencesForm: FormGroup;
+  constructor(private router: Router, private workoutsService: WorkoutsService) {
+    this.preferencesForm = new FormGroup({
+      weight: new FormControl(0, [Validators.required]),
+      height: new FormControl(0, [Validators.required]),
+      sex: new FormControl('', [Validators.required]),
+      exercises: new FormControl([], [Validators.required, Validators.minLength(1)])
+    });
+  }
   exercises = [
     {
-      name: 'Back',
-      id: 0
+      name: 'Abductors',
+      id: 'abductors'
     },
     {
-      name: 'Cardio',
-      id: 1
+      name: 'Abs',
+      id: 'abs'
     },
     {
-      name: 'Chest',
-      id: 2
+      name: 'Adductors',
+      id: 'adductors'
     },
     {
-      name: 'Lower Arms',
-      id: 3
+      name: 'Biceps',
+      id: 'biceps'
     },
     {
-      name: 'Lower Legs',
-      id: 4
+      name: 'Calves',
+      id: 'calves'
     },
     {
-      name: 'Neck',
-      id: 5
+      name: 'CardioVascular System',
+      id: 'cardio'
     },
     {
-      name: 'Shoulders',
-      id: 6
+      name: 'Delts',
+      id: 'delts'
     },
     {
-      name: 'Upper Arms',
-      id: 7
+      name: 'Forearms',
+      id: 'forearms'
     },
     {
-      name: 'Upper Legs',
-      id: 8
+      name: 'Glutes',
+      id: 'glutes'
     },
     {
-      name: 'Waist',
-      id: 9
+      name: 'Hamstrings',
+      id: 'hamstrings'
+    },
+    {
+      name: 'Lats',
+      id: 'lats'
+    },
+    {
+      name: 'Levator Scapulae',
+      id: 'levator scapulae'
+    },
+    {
+      name: 'Pectorals',
+      id: 'pectorals'
+    },
+    {
+      name: 'Quads',
+      id: 'quads'
+    },
+    {
+      name: 'Serratus Anterior',
+      id: 'serratus anterior'
+    },
+    {
+      name: 'Spine',
+      id: 'spine'
+    },
+    {
+      name: 'Traps',
+      id: 'traps'
+    },
+    {
+      name: 'Triceps',
+      id: 'triceps'
+    },
+    {
+      name: 'Upper Back',
+      id: 'upper back'
     }
   ];
-  selectedExercises: number[] = [];
-  preferencesForm = new FormGroup({
-    weight: new FormControl(0, [Validators.required]),
-    height: new FormControl(0, [Validators.required]),
-  });
-  
-  exerciseForm = new FormGroup({
-    exercises: new FormControl(this.selectedExercises, [Validators.required, Validators.minLength(1)])
-  });
+
   savePreferences() {
-    console.log(this.preferencesForm.value);
-    console.log(this.exerciseForm.value);
-    if (this.preferencesForm.valid && this.exerciseForm.valid) {
-      console.log('Preferences saved');
-      this.workoutsService.getExercises().subscribe((data) => {
-        console.log(data);
-      });
+    if (this.preferencesForm.valid) {
+      localStorage.setItem('preferences', JSON.stringify(this.preferencesForm.value.exercises));
       this.router.navigate(['/home']);
     }
   }

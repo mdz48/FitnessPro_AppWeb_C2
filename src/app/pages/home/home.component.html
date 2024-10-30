@@ -3,20 +3,9 @@
     <section>
         <h1 class="text-[60px] font-bold">Recommended Workouts</h1>
         <section class="grid grid-cols-2 gap-4">
-            <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '360px' }">
-                <ng-template pTemplate="header">
-                    <img alt="Card" src="/assets/yo4yGTLzSbR5ix.gif" />
-                </ng-template>
-                <p>
-                    Lorem ipsum dolor sit amet...
-                </p>
-                <ng-template pTemplate="footer">
-                    <div class="flex gap-3 mt-1">
-                        <p-button label="Cancel" severity="secondary" class="w-full" styleClass="w-full" />
-                        <p-button label="Save" class="w-full" styleClass="w-full" />
-                    </div>
-                </ng-template>
-            </p-card>   
+            <div *ngFor="let exercise of list">
+                <app-card [exercise]="exercise"></app-card>
+            </div>
         </section>
     </section>
 </main>

@@ -1,33 +1,36 @@
 <main class="flex justify-center items-center h-screen flex-col gap-10">
     <section class="w-[85%] p-10 gap-10 flex">
-        <form class="flex flex-col items-center justify-center bg-[#EBEBEB] rounded-[15px] p-10 w-[40%] gap-4">
+        <form [formGroup]="preferencesForm" class="flex flex-col items-center justify-center bg-[#EBEBEB] rounded-[15px] p-10 w-[40%] gap-4">
             <div class="w-full flex flex-col gap-2 items-center justify-center">
                 <label for="sex" class="flex justify-start w-1/2">Sex</label>
-                <select name="sex" id="sex" class="border border-black rounded-lg p-2 w-1/2">
+                <select name="sex" id="sex" class="border border-black rounded-lg p-2 w-1/2" formControlName="sex">
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
             </div>
             <div class="w-full flex flex-col gap-2 items-center justify-center">
                 <label for="weight" class="flex justify-start w-1/2">Weight</label>
-                <input type="number" name="weight" id="weight" class="border border-black rounded-lg p-2 w-1/2" placeholder="kg">
+                <input type="number" name="weight" id="weight" class="border border-black rounded-lg p-2 w-1/2" placeholder="kg" formControlName="weight">
             </div>
             <div class="w-full flex flex-col gap-2 items-center justify-center">
                 <label for="height" class="flex justify-start w-1/2">Height</label>
-                <input type="number" name="height" id="height" class="border border-black rounded-lg p-2 w-1/2" placeholder="cm">
+                <input type="number" name="height" id="height" class="border border-black rounded-lg p-2 w-1/2" placeholder="cm" formControlName="height">
             </div>
         </form>
-        <div class="flex flex-col gap-8 bg-[#EBEBEB] rounded-[15px] p-10 w-[60%]">
-            <h1>Bodyparts to train</h1>
-            <div class="grid grid-cols-2 gap-x-16 gap-y-4">
-                <div *ngFor="let exercise of exercises" class="field-checkbox">
-                    <p-checkbox 
-                        [label]="exercise.name" class="text-lg"
-                        name="group" 
-                        [value]="exercise.id" />
+        <form [formGroup]="preferencesForm" class="flex flex-col gap-8 bg-[#EBEBEB] rounded-[15px] p-10 w-[60%]">
+            <div class="flex flex-col gap-8 bg-[#EBEBEB] rounded-[15px] p-10 w-[60%]">
+                <h1>Bodyparts to train</h1>
+                <div class="grid grid-cols-4 gap-x-44 gap-y-4">
+                    <div *ngFor="let exercise of exercises" class="field-checkbox">
+                        <p-checkbox 
+                            [label]="exercise.name" class="text-lg"
+                            name="group" 
+                            formControlName="exercises"
+                            [value]="exercise.id" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </form>
     </section>
     <button type="button" class="bg-[#FD6934] rounded-lg p-2 w-[210px] text-[24px] text-white font-sans" (click)="savePreferences()">
         Get Started

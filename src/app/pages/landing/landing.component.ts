@@ -11,5 +11,5 @@ import { RouterLink } from '@angular/router';
 })
 export class LandingComponent {
   links = { name: 'Log in', link: '/login' }
-  button = { name: 'Sign up', link: '/signup' }
+  button = { name: 'Sign up', link: '/register' }
 }
