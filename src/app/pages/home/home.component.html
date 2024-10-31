@@ -1,6 +1,15 @@
 <app-navbar [link]="links" [button]="button"></app-navbar>
-<main class="flex flex-col items-center">
-    <section>
+<main class="flex gap-x-16">
+    <section class="w-[20%] bg-orange-500 flex flex-col items-center">
+        <h1 class="text-[40px] text-white mt-10">
+            Settings
+        </h1>
+        <div class="flex flex-col justify-center gap-4 mt-12 w-[68%]">
+            <a href="/preferences" ><h3 class="text-[20px] text-white">Edit Preferences</h3></a>
+            <h3 class="text-[20px] text-white">My List</h3>
+        </div>
+    </section>
+    <section class="w-[80%] flex flex-col items-center mt-7">
         <h1 class="text-[60px] font-bold">Recommended Workouts</h1>
         <section class="grid grid-cols-2 gap-4">
             <div *ngFor="let exercise of list">
