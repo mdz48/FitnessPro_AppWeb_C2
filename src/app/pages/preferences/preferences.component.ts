@@ -7,6 +7,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-preferences',
@@ -20,7 +21,8 @@ export class PreferencesComponent {
   constructor(
     readonly router: Router,
     private workoutsService: WorkoutsService,
-    private authService: AuthService
+    readonly authService: AuthService,
+    readonly userService: UserService
   ) {
     this.preferencesForm = new FormGroup({
       weight: new FormControl(0, [Validators.required]),
@@ -111,7 +113,6 @@ export class PreferencesComponent {
   savePreferences() {
     if (this.preferencesForm.valid) {
       const registrationData = this.authService.getRegistrationData();
-      
       if (!registrationData) {
         console.error('No hay datos de registro');
         return;
@@ -121,10 +122,17 @@ export class PreferencesComponent {
         registrationData.password,
         this.preferencesForm.value.height,
         this.preferencesForm.value.weight,
-        this.preferencesForm.value.sex
+        this.preferencesForm.value.sex,
+        this.preferencesForm.value.exercises
       ).subscribe({
-        next: () => {
-          this.router.navigate(['/preferences']);
+        next: (data) => {
+          // console.log("preferences iduser", data.iduser);
+          console.log(data, "preferences");
+          console.log(data.iduser, "id de preferences");
+          
+          this.userService.setIduser(data.iduser);
+          this.authService.setIsLogged(true);
+          this.router.navigate(['/home']);
         },
         error: (error) => {
           console.error('Error en el registro:', error);

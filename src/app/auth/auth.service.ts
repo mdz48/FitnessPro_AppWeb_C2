@@ -4,12 +4,13 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Password } from 'primeng/password';
 import { Observable } from 'rxjs';
+import { IExercise } from '../models/iexercise-model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  isLoggedIn = false;
+  private isLoggedIn = false;
   private url = 'http://localhost:8000/api/user';
   private options = {
     headers: new HttpHeaders({
@@ -22,9 +23,14 @@ export class AuthService {
   isLogged(): boolean {
     return this.isLoggedIn;
   }
+  
+  setIsLogged(value: boolean) {
+    this.isLoggedIn = value;
+  }
 
-  getUserExercices(iduser: number): Observable<string> {
-    return this.httpClient.get<string>(`${this.url}/${iduser}/exercises`, this.options);
+  getUserExercices(iduser: number): Observable<any> {
+    console.log(iduser, "auth");
+    return this.httpClient.get<any>(`${this.url}/${iduser}/exercises`, this.options);
   }
 
   logout() {
@@ -36,8 +42,9 @@ export class AuthService {
     return this.httpClient.post<any>(`${this.url}/login`, {mail, password}, this.options);
   }
 
-  register(mail: string, password: string, height:number, weight:number, sex:string): Observable<any> {
-    return this.httpClient.post<any>(`${this.url}`, {mail, password, height, weight, sex}, this.options);
+  register(mail: string, password: string, height:number, weight:number, sex:string, relation:string[]): Observable<any> {
+    // console.log(mail, password, height, weight, sex, relation);
+    return this.httpClient.post<any>(`${this.url}`, {mail, password, height, weight, sex, relation}, this.options);
   }
 
   setRegistrationData(email: string, password: string) {

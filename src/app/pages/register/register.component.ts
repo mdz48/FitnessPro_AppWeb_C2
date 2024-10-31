@@ -16,19 +16,15 @@ export class RegisterComponent {
   constructor(private authService: AuthService, readonly router: Router) {}
   registerForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(4)]),
   });
 
   register() {
     if(this.registerForm.valid){
       const email = this.registerForm.value.email ?? '';
-      console.log(email);
-      
       const password = this.registerForm.value.password ?? '';
-      console.log(password);
-      
       this.authService.setRegistrationData(email, password);
-      // this.router.navigate(['preferences']);
+      this.router.navigate(['preferences']);
     }
   }
 }
