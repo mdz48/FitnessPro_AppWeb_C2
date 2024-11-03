@@ -10,6 +10,8 @@ import { RouterLink } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
+import { catchError } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-mylist',
@@ -23,13 +25,23 @@ export class MylistComponent {
   listOfExercises: string[] = [];
 
   addToFavoritesHandler(name: string) {
-    this.userService.addToFavorites(name).subscribe((data) => {
+    this.userService.addToFavorites(name).pipe(
+      catchError((error) => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Exercise already in favorites'});
+        return of(null);
+      })
+    ).subscribe((data) => {
       console.log(data, "data");
     });
   }
 
   removeFromFavoritesHandler(name: string) {
-    this.userService.removeFromFavorites(name).subscribe((data) => {
+    this.userService.removeFromFavorites(name).pipe(
+      catchError((error) => {
+        this.messageService.add({severity:'error', summary: 'Error', detail: 'Exercise not in favorites'});
+        return of(null);
+      })
+    ).subscribe((data) => {
       console.log(data, "deleted");
     });
   }
@@ -43,9 +55,9 @@ export class MylistComponent {
       });
 
       // YA FUNCIONA
-      // this.workoutsService.getFavorites(this.listOfExercises).subscribe((data) => {
-      //   this.list = data.flat();
-      // });
+      this.workoutsService.getFavorites(this.listOfExercises).subscribe((data) => {
+        this.list = data.flat();
+      });
     });
   }
 

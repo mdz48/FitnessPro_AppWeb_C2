@@ -8,8 +8,8 @@ import { IDataAPI } from '../models/idata-api';
 })
 export class WorkoutsService {
 
-  private url = 'https://exercisedb.p.rapidapi.com/exercises/target/fake';
-  private favoritesUrl = 'https://exercisedb.p.rapidapi.com/exercises/name/fake';
+  private url = 'https://exercisedb.p.rapidapi.com/exercises/target';
+  private favoritesUrl = 'https://exercisedb.p.rapidapi.com/exercises/name';
   private options = {
     headers: new HttpHeaders({
       'x-rapidapi-key': '625c6bdbf6msh57a3831dc2e7066p1a2997jsn2a8a2e8aa5e8',

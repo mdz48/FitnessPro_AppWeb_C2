@@ -59,5 +59,9 @@ export class AuthService {
     return this.registrationData;
   }
 
+  getUserByMail(mail: string): Observable<any> {
+    return this.httpClient.get<any>(`${this.url}/${mail}`, this.options);
+  }
+
   constructor(readonly httpClient : HttpClient, readonly router : Router) { }
 }

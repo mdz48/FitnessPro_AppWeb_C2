@@ -82,19 +82,19 @@ export class HomeComponent {
       console.log(this.listOfExercises, "listOfExercises");
 
       // YA FUNCIONA
-      // this.workoutsService.getExercises(this.listOfExercises).subscribe((data) => {
-      //   this.list = data.flat();
-      // });
+      this.workoutsService.getExercises(this.listOfExercises).subscribe((data) => {
+        this.list = data.flat();
+      });
     });
     
     // this.workoutsService.getExercises(preferences).subscribe((data) => {
     //   this.list = data.flat();
     // });
     // LIST EXAMPLE, NO API DATA
-    this.list = [
-      { id: 0, name: 'back lever', gifUrl: 'assets/yo4yGTLzSbR5ix.gif', equipment: 'body weight', target: 'upper back' },
-      { id: 1, name: 'Exercise 2', gifUrl: 'assets/yo4yGTLzSbR5ix.gif', equipment: 'Equipment 2', target: 'Target 2' },
-      { id: 2, name: 'Exercise 3', gifUrl: 'assets/yo4yGTLzSbR5ix.gif', equipment: 'Equipment 3', target: 'Target 3' },
-    ];
+    // this.list = [
+    //   { id: 0, name: 'back lever', gifUrl: 'assets/yo4yGTLzSbR5ix.gif', equipment: 'body weight', target: 'upper back' },
+    //   { id: 1, name: 'Exercise 2', gifUrl: 'assets/yo4yGTLzSbR5ix.gif', equipment: 'Equipment 2', target: 'Target 2' },
+    //   { id: 2, name: 'Exercise 3', gifUrl: 'assets/yo4yGTLzSbR5ix.gif', equipment: 'Equipment 3', target: 'Target 3' },
+    // ];
   }
 }
