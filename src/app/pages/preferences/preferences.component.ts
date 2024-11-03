@@ -54,7 +54,7 @@ export class PreferencesComponent {
     },
     {
       name: 'CardioVascular System',
-      id: 'cardio'
+      id: 'cardiovascular system'
     },
     {
       name: 'Delts',
@@ -126,10 +126,6 @@ export class PreferencesComponent {
         this.preferencesForm.value.exercises
       ).subscribe({
         next: (data) => {
-          // console.log("preferences iduser", data.iduser);
-          console.log(data, "preferences");
-          console.log(data.iduser, "id de preferences");
-          
           this.userService.setIduser(data.iduser);
           this.authService.setIsLogged(true);
           this.router.navigate(['/home']);

@@ -8,7 +8,8 @@ import { IDataAPI } from '../models/idata-api';
 })
 export class WorkoutsService {
 
-  private url = 'https://exercisedb.p.rapidapi.com/exercises/target';
+  private url = 'https://exercisedb.p.rapidapi.com/exercises/target/fake';
+  private favoritesUrl = 'https://exercisedb.p.rapidapi.com/exercises/name/fake';
   private options = {
     headers: new HttpHeaders({
       'x-rapidapi-key': '625c6bdbf6msh57a3831dc2e7066p1a2997jsn2a8a2e8aa5e8',
@@ -18,6 +19,11 @@ export class WorkoutsService {
 
   getExercises(list: string[]): Observable<IDataAPI[]> {
     let requests = list.map((id) => this.httpClient.get<IDataAPI>(`${this.url}/${id}`, this.options));
+    return forkJoin([...requests]);
+  }
+
+  getFavorites(list: string[]): Observable<IDataAPI[]> {
+    let requests = list.map((name) => this.httpClient.get<IDataAPI>(`${this.favoritesUrl}/${name}`, this.options));
     return forkJoin([...requests]);
   }
 

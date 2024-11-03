@@ -1,4 +1,16 @@
-<app-navbar [link]="links" [button]="button"/>
+<header>
+    <nav>
+        <div class="logo">
+            <a routerLink="/"><img src="assets/logo.png" alt="logo" ></a>
+        </div>
+        <div class="menu">
+            <ul>
+                <li><a routerLink="/login">Login</a></li>
+                <li><button class="btn-login" routerLink="/register">Sign up</button></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 <main class="flex justify-center items-center h-[80vh]">
     <section class="flex w-[90%] justify-between">
         <div class=" flex items-center flex-col justify-center w-[50%] gap-10">

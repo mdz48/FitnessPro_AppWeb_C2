@@ -1,12 +1,12 @@
 <header>
     <nav>
         <div class="logo">
-            <a href="/"><img src="assets/logo.png" alt="logo" ></a>
+            <a routerLink="/"><img src="assets/logo.png" alt="logo" ></a>
         </div>
         <div class="menu">
             <ul>
-                <li><a [routerLink]="link.link">{{link.name}}</a></li>
-                <button class="btn-login" [routerLink]="button.link">{{button.name}}</button>
+                <li><a routerLink="/home">Home</a></li>
+                <button class="btn-login" (click)="logout()">Log out</button>
             </ul>
         </div>
     </nav>

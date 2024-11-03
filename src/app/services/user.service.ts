@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -19,9 +20,27 @@ export class UserService {
     this.registrationData = { email, password };
   }
 
+  savePreferences(relation: string[]) {
+    console.log(relation);
+    
+    return this.httpClient.put(`${this.url}/${this.getIduser()}/exercises`, {relation}, this.options);    
+  }
+
   getRegistrationData() {
     console.log(this.registrationData);
     return this.registrationData;
+  }
+
+  getFavorites(): Observable<any> {
+    return this.httpClient.get(`${this.url}/${this.getIduser()}/mylist`, this.options);
+  }
+
+  addToFavorites(relation: string) {
+    return this.httpClient.post(`${this.url}/${this.getIduser()}/mylist`, {relation}, this.options);
+  }
+
+  removeFromFavorites(relation: string) {
+    return this.httpClient.delete(`${this.url}/${this.getIduser()}/${relation}/mylist`, this.options);
   }
 
   setIduser(id: number) {

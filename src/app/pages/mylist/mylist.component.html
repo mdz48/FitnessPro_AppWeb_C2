@@ -1,6 +1,6 @@
 <app-navbar></app-navbar>
 <main class="flex gap-x-16">
-    <section class="w-[20%] bg-orange-500 flex flex-col items-center ">
+    <section class="w-[20%] bg-orange-500 flex flex-col items-center h-screen">
         <h1 class="text-[40px] text-white mt-10">
             Settings
         </h1>
@@ -11,7 +11,7 @@
         </div>
     </section>
     <section class="w-[80%] flex flex-col items-center mt-7">
-        <h1 class="text-[60px] font-bold">Recommended Workouts</h1>
+        <h1 class="text-[60px] font-bold">My Favorites</h1>
         <section class="grid grid-cols-2 gap-4">
             <div *ngFor="let exercise of list">
                 <app-card [exercise]="exercise" (addToFavorites)="addToFavoritesHandler($event)" (removeFromFavorites)="removeFromFavoritesHandler($event)"></app-card>

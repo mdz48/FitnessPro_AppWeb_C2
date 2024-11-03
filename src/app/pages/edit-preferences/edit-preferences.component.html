@@ -1,0 +1,21 @@
+<header>
+    <app-navbar/>
+</header>
+<main class="flex justify-center items-center mt-5">
+    <form [formGroup]="editPreferencesForm" class="flex flex-col gap-8 bg-[#EBEBEB] rounded-[15px] p-10 w-[60%]">
+        <div class="flex flex-col gap-8 bg-[#EBEBEB] rounded-[15px] p-10 w-[60%]">
+            <h1 class="text-[24px] font-bold">Target muscles to train</h1>
+            <div class="grid grid-cols-3 gap-x-44 gap-y-4">
+                <div *ngFor="let exercise of exercises" class="field-checkbox">
+                    <p-checkbox [label]="exercise.name" class="text-lg" name="group" formControlName="exercises"
+                            [value]="exercise.id" />
+                </div>
+            </div>
+        </div>
+        <div class="flex justify-center">
+            <button type="button" class="bg-orange-500 text-white rounded-[15px] p-2 w-[10%]"  (click)="savePreferences()">Save
+                <i class="pi pi-check text-[14px]"></i>
+            </button>
+        </div>
+    </form>
+</main>
