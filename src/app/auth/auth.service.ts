@@ -11,7 +11,7 @@ import { IExercise } from '../models/iexercise-model';
 })
 export class AuthService {
   private isLoggedIn = false;
-  private url = 'http://localhost:8000/api/user';
+  private url = 'http://50.17.125.18/api/user';
   private options = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',

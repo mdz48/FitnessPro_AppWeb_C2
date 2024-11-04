@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CheckboxModule } from 'primeng/checkbox';
 import { AuthService } from '../../auth/auth.service';
@@ -16,7 +16,7 @@ import { MessageService } from 'primeng/api';
   templateUrl: './edit-preferences.component.html',
   styleUrl: './edit-preferences.component.css'
 })
-export class EditPreferencesComponent {
+export class EditPreferencesComponent implements OnInit {
   exercises = [
     {
       name: 'Abductors',
@@ -101,6 +101,24 @@ export class EditPreferencesComponent {
       exercises: new FormControl([], [Validators.required, Validators.minLength(1)]),
     });
   } 
+
+  ngOnInit(): void {
+    this.getAllChecked();
+  }
+
+  getAllChecked(){
+    this.userService.getPreferences().subscribe((data) => {
+        if (data) {
+            this.editPreferencesForm.patchValue({
+                exercises: data.map((item: any) => item.exercise)
+            });
+        } else {
+            console.error('No se encontraron preferencias de ejercicios.');
+        }
+    }, error => {
+        console.error('Error al obtener las preferencias:', error);
+    });
+  }
 
   showSuccess() {
     this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Preferences saved successfully' });

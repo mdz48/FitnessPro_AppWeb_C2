@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-  private url = 'http://localhost:8000/api/user';
+  private url = 'http://50.17.125.18/api/user';
   private registrationData: {email: string, password: string} | null = null;
   private iduser: number | null = null;
   private options = {
@@ -29,6 +29,10 @@ export class UserService {
   getRegistrationData() {
     console.log(this.registrationData);
     return this.registrationData;
+  }
+
+  getPreferences(): Observable<any[]> {
+    return this.httpClient.get<any[]>(`${this.url}/${this.getIduser()}/exercises`, this.options);
   }
 
   getFavorites(): Observable<any> {
